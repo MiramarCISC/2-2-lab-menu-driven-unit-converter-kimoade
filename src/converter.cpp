@@ -24,6 +24,9 @@ bool requiresNonNegativeValue(int choice) {
 }
 
 bool isValidValueForChoice(int choice, double value) {
+    if (!isValidMenuChoice(choice) || choice == EXIT_CHOICE) {
+        return false;
+    }
     if (requiresNonNegativeValue(choice)) {
         return value >= 0;
     }
