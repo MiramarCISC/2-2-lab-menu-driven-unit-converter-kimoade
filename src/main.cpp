@@ -4,31 +4,6 @@
 
 using namespace std;
 
-const int EXIT_CHOICE = 0;
-
-void printMenu() {
-    cout << "\nUnit Converter" << endl << endl;
-    cout << "1. Inches to centimeters" << endl;
-    cout << "2. Centimeters to inches" << endl;
-    cout << "3. Pounds to kilograms" << endl;
-    cout << "4. Kilograms to pounds" << endl;
-    cout << "5. Fahrenheit to Celsius" << endl;
-    cout << "6. Celsius to Fahrenheit" << endl;
-    cout << "0. Exit" << endl << endl;
-    cout << "Enter choice: ";
-}
-
-bool isValidMenuChoice(int choice) {
-    return (choice >= 1 && choice <= 6) || choice == EXIT_CHOICE;
-}
-
-bool isValidValueForChoice(int choice, double value) {
-    if (choice >= 1 && choice <= 4) {
-        return value >= 0;
-    }
-    return true;
-}
-
 int main() {
     int choice = -1;
     double value = 0.0;
@@ -69,27 +44,27 @@ int main() {
         }
 
         switch (choice) {
-            case 1:
+            case INCHES_TO_CENTIMETERS:
                 result = inchesToCentimeters(value);
                 cout << value << " inches is " << result << " centimeters" << endl;
                 break;
-            case 2:
+            case CENTIMETERS_TO_INCHES:
                 result = centimetersToInches(value);
                 cout << value << " centimeters is " << result << " inches" << endl;
                 break;
-            case 3:
+            case POUNDS_TO_KILOGRAMS:
                 result = poundsToKilograms(value);
                 cout << value << " pounds is " << result << " kilograms" << endl;
                 break;
-            case 4:
+            case KILOGRAMS_TO_POUNDS:
                 result = kilogramsToPounds(value);
                 cout << value << " kilograms is " << result << " pounds" << endl;
                 break;
-            case 5:
+            case FAHRENHEIT_TO_CELSIUS:
                 result = fahrenheitToCelsius(value);
                 cout << value << " Fahrenheit is " << result << " Celsius" << endl;
                 break;
-            case 6:
+            case CELSIUS_TO_FAHRENHEIT:
                 result = celsiusToFahrenheit(value);
                 cout << value << " Celsius is " << result << " Fahrenheit" << endl;
                 break;
