@@ -1,5 +1,6 @@
 #include "converter.hpp"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -8,11 +9,13 @@ int main() {
     double value = 0.0;
     double result = 0.0;
 
-    do {
-        printMenu();
-        cin >> choice;
+    cout << fixed << setprecision(2);
 
-        if (!isValidMenuChoice(choice)) {
+    while (true) {
+        printMenu();
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(1000, '\n');
             cout << "Invalid choice. Please try again." << endl;
             continue;
         }
@@ -22,8 +25,18 @@ int main() {
             break;
         }
 
+        if (!isValidMenuChoice(choice)) {
+            cout << "Invalid choice. Please try again." << endl;
+            continue;
+        }
+
         cout << "Enter value: ";
-        cin >> value;
+        if (!(cin >> value)) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid value for this conversion. Please try again." << endl;
+            continue;
+        }
 
         if (!isValidValueForChoice(choice, value)) {
             cout << "Invalid value for this conversion. Please try again." << endl;
@@ -33,40 +46,30 @@ int main() {
         switch (choice) {
             case INCHES_TO_CENTIMETERS:
                 result = inchesToCentimeters(value);
-                cout << value << " inches = " << result << " centimeters" << endl;
+                cout << value << " inches is " << result << " centimeters" << endl;
                 break;
-
             case CENTIMETERS_TO_INCHES:
                 result = centimetersToInches(value);
-                cout << value << " centimeters = " << result << " inches" << endl;
+                cout << value << " centimeters is " << result << " inches" << endl;
                 break;
-
             case POUNDS_TO_KILOGRAMS:
                 result = poundsToKilograms(value);
-                cout << value << " pounds = " << result << " kilograms" << endl;
+                cout << value << " pounds is " << result << " kilograms" << endl;
                 break;
-
             case KILOGRAMS_TO_POUNDS:
                 result = kilogramsToPounds(value);
-                cout << value << " kilograms = " << result << " pounds" << endl;
+                cout << value << " kilograms is " << result << " pounds" << endl;
                 break;
-
             case FAHRENHEIT_TO_CELSIUS:
                 result = fahrenheitToCelsius(value);
-                cout << value << " Fahrenheit = " << result << " Celsius" << endl;
+                cout << value << " Fahrenheit is " << result << " Celsius" << endl;
                 break;
-
             case CELSIUS_TO_FAHRENHEIT:
                 result = celsiusToFahrenheit(value);
-                cout << value << " Celsius = " << result << " Fahrenheit" << endl;
-                break;
-
-            default:
-                cout << "Unexpected choice." << endl;
+                cout << value << " Celsius is " << result << " Fahrenheit" << endl;
                 break;
         }
-
-    } while (choice != EXIT_CHOICE);
+    }
 
     return 0;
 }
